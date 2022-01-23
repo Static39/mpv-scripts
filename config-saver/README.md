@@ -20,4 +20,4 @@ This script currently saves:
 * Subtitle ASS override
 
 On account of the fact that this adds elements to the OSC the entire OSC is contained within this script.
-If you have other OSC scripts you would have to move the code for saving the configuration and put it in your scripts.
+If you have other OSC scripts you would have to move the code for saving the configuration and put it in your scripts unless someone can figure out how to do this a smart way.
