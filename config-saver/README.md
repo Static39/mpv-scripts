@@ -1,6 +1,6 @@
 # config-saver
 
-A simple script to save the current audio track, sub track, sub position, etc to the current folder.
+A simple script to save the current audio track, sub track, sub position, etc. to the current folder.
 
 ## Usage
 
