@@ -7,8 +7,7 @@ A simple script to save the current audio track, sub track, sub position, etc. t
 * In your `mpv.conf` file add the line `osc=no`.
 * Keep all the video files you want the configuration to persist on in a single folder.
 * Adjust audio/subtitles to the desired settings.
-* Click the floppy disk icon on the overlay to save configuration (or press F1).
-  A `.conf` file will be written to the folder with the configuration details.
+* Click the floppy disk icon on the overlay to save configuration (or press `F1`). A `.conf` file will be written to the folder with the configuration details.
 
 ## Notes
 
