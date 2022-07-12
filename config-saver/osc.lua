@@ -2863,10 +2863,16 @@ function visibility_mode(mode, no_osd)
     request_tick()
 end
 
+--- config-saver code ---
+
 -- Selects properties from the .conf file if it exists
 function subSelect()
     local savedSub = {}
-    local path = mp.get_property("working-directory");
+    local path = mp.get_property("path") or ""
+    local filename = mp.get_property("filename")
+
+    path = path:gsub(strPlainText(filename), "")
+
     local file = io.open(path .. "\\.conf", "r")
 
     if file then
@@ -2885,8 +2891,20 @@ end
 
 -- Saves the properties to a file when the binding key is pressed
 function addShow() 
-    local path = mp.get_property("working-directory")
+    local path = mp.get_property("path") or ""
+    local filename = mp.get_property("filename")
+
+    if not filename then
+        mp.osd_message("No media loaded", 1.5)
+        return
+    end
+    path = path:gsub(strPlainText(filename), "")
+
     local file = io.open(path .. "\\.conf", "w")
+    if not file then
+        mp.osd_message("Cannot write to media directory", 1.5)
+        return
+    end
 
     local audio = mp.get_property("current-tracks/audio/id") or "no"
     local sub = mp.get_property("current-tracks/sub/id") or "no"
@@ -2901,10 +2919,19 @@ function addShow()
     mp.osd_message("Configuration Saved", 1.5)
 end
 
-visibility_mode(user_opts.visibility, true)
-mp.register_script_message("osc-visibility", visibility_mode)
+function strPlainText(strText)
+    -- Prefix every non-alphanumeric character (%W) with a % escape character, 
+    -- where %% is the % escape, and %1 is original character
+    return strText:gsub("(%W)","%%%1")
+end
+
 mp.register_event("file-loaded", subSelect)
 mp.add_key_binding("f1", "config-save", addShow)
+
+--- config-saver code end ---
+
+visibility_mode(user_opts.visibility, true)
+mp.register_script_message("osc-visibility", visibility_mode)
 mp.add_key_binding(nil, "visibility", function() visibility_mode("cycle") end)
 
 set_virt_mouse_area(0, 0, 0, 0, "input")
