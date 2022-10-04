@@ -20,3 +20,7 @@ This script currently saves:
 
 On account of the fact that this adds elements to the OSC the entire OSC is contained within this script.
 If you have other OSC scripts you would have to move the code for saving the configuration and put it in your scripts unless someone can figure out how to do this a smart way.
+
+## Bugs
+
+* Doesn't properly display the configuration save icon in the OSC on Ubuntu and likely other Linux distros.
